@@ -1,0 +1,18 @@
+name: Sync `documentation` directory to ReadMe
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout this repo
+        uses: actions/checkout@v3
+
+      # Run GitHub Action to sync docs in `documentation` directory
+      - name: GitHub Action
+        uses: readmeio/rdme@7.2.0
+        with:
+          rdme: docs ./documentation --key=${{ secrets.README_API_KEY }} --version=1.0
